@@ -18,6 +18,11 @@ class DeprecatedFunctions
 	{
 		var lua:State = funk.lua;
 		// DEPRECATED, DONT MESS WITH THESE SHITS, ITS JUST THERE FOR BACKWARD COMPATIBILITY
+		Lua_helper.add_callback(lua, "addAnimationByIndicesLoop", function(obj:String, name:String, prefix:String, indices:String, framerate:Int = 24) {
+			funk.luaTrace("addAnimationByIndicesLoop is deprecated! Use addAnimationByIndices instead", false, true);
+			return LuaUtils.addAnimByIndices(obj, name, prefix, indices, framerate, true);
+		});
+
 		Lua_helper.add_callback(lua, "objectPlayAnimation", function(obj:String, name:String, forced:Bool = false, ?startFrame:Int = 0) {
 			funk.luaTrace("objectPlayAnimation is deprecated! Use playAnim instead", false, true);
 			if(PlayState.instance.getLuaObject(obj,false) != null) {
@@ -48,12 +53,8 @@ class DeprecatedFunctions
 		});
 		Lua_helper.add_callback(lua, "luaSpriteMakeGraphic", function(tag:String, width:Int, height:Int, color:String) {
 			funk.luaTrace("luaSpriteMakeGraphic is deprecated! Use makeGraphic instead", false, true);
-			if(PlayState.instance.modchartSprites.exists(tag)) {
-				var colorNum:Null<FlxColor> = FlxColor.fromString(color);
-				if(colorNum == null) colorNum = FlxColor.fromString('0x' + color);
-				if(colorNum == null) colorNum = FlxColor.WHITE; //fail safe
-				PlayState.instance.modchartSprites.get(tag).makeGraphic(width, height, colorNum);
-			}
+			if(PlayState.instance.modchartSprites.exists(tag))
+				PlayState.instance.modchartSprites.get(tag).makeGraphic(width, height, CoolUtil.colorFromString(color));
 		});
 		Lua_helper.add_callback(lua, "luaSpriteAddAnimationByPrefix", function(tag:String, name:String, prefix:String, framerate:Int = 24, loop:Bool = true) {
 			funk.luaTrace("luaSpriteAddAnimationByPrefix is deprecated! Use addAnimationByPrefix instead", false, true);

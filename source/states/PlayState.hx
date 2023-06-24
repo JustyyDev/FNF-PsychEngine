@@ -94,7 +94,7 @@ class PlayState extends MusicBeatState
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
-	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
+	public var modchartTexts:Map<String, FlxText> = new Map<String, FlxText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
 	#end
 
@@ -1347,6 +1347,10 @@ class PlayState extends MusicBeatState
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
+			
+			case 'Play Sound':
+				precacheList.set(event.value1, 'sound');
+				Paths.sound(event.value1);
 		}
 
 		stagesFunc(function(stage:BaseStage) stage.eventPushed(event));
@@ -2168,6 +2172,10 @@ class PlayState extends MusicBeatState
 				} else {
 					LuaUtils.setVarInArray(this, value1, value2);
 				}
+			
+			case 'Play Sound':
+				if(flValue2 == null) flValue2 = 1;
+				FlxG.sound.play(Paths.sound(value1), flValue2);
 		}
 		
 		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, flValue1, flValue2, strumTime));
@@ -2480,11 +2488,13 @@ class PlayState extends MusicBeatState
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
+		var antialias:Bool = ClientPrefs.data.antialiasing;
 
-		if (PlayState.isPixelStage)
+		if (isPixelStage)
 		{
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
+			antialias = false;
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
@@ -2498,6 +2508,7 @@ class PlayState extends MusicBeatState
 		rating.visible = (!ClientPrefs.data.hideHud && showRating);
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
+		rating.antialiasing = antialias;
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
@@ -2508,6 +2519,7 @@ class PlayState extends MusicBeatState
 		comboSpr.visible = (!ClientPrefs.data.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.data.comboOffset[0];
 		comboSpr.y -= ClientPrefs.data.comboOffset[1];
+		comboSpr.antialiasing = antialias;
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
 
@@ -2580,6 +2592,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = !ClientPrefs.data.hideHud;
+			numScore.antialiasing = antialias;
 
 			//if (combo >= 10 || combo == 0)
 			if(showComboNum)
@@ -3057,7 +3070,7 @@ class PlayState extends MusicBeatState
 		var hue:Float = 0;
 		var sat:Float = 0;
 		var brt:Float = 0;
-		if (data > -1 && data < ClientPrefs.data.arrowHSV.length)
+		/*if (data > -1 && data < ClientPrefs.data.arrowHSV.length)
 		{
 			hue = ClientPrefs.data.arrowHSV[data][0] / 360;
 			sat = ClientPrefs.data.arrowHSV[data][1] / 100;
@@ -3068,7 +3081,7 @@ class PlayState extends MusicBeatState
 				sat = note.noteSplashSat;
 				brt = note.noteSplashBrt;
 			}
-		}
+		}*/
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
 		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
