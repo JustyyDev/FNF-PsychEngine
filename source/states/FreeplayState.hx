@@ -115,7 +115,7 @@ class FreeplayState extends MusicBeatState
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
+			songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
 
