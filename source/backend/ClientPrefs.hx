@@ -183,6 +183,27 @@ class ClientPrefs {
 	public static function loadPrefs() {
 		if(data == null) data = new SaveVariables();
 		if(defaultData == null) defaultData = new SaveVariables();
+		
+				if(FlxG.save.data.gjUser != null)
+					{
+						FlxG.save.data.gjUser = FlxG.save.data.gjUser;
+					}
+			
+					if (FlxG.save.data.gjToken != null)
+					{
+						FlxG.save.data.gjToken = FlxG.save.data.gjToken;
+					}
+			
+					if (FlxG.save.data.lbToggle == null)
+					{
+						FlxG.save.data.lbToggle = false;
+						FlxG.save.flush();
+					}
+			
+					if (FlxG.save.data.lbToggle != null)
+					{
+						GameJoltAPI.leaderboardToggle = FlxG.save.data.lbToggle;
+					}
 
 		for (key in Reflect.fields(data)) {
 			if (key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key)) {
@@ -229,7 +250,7 @@ class ClientPrefs {
 		if(save != null)
 		{
 			if(save.data.keyboard != null) {
-				var loadedControls:Map<String, Array<FlxKey>> = save.data.keyboard;
+				var loadedControls:Map<String, Array<FlxKey>> = save.data.keyboard;FRFF
 				for (control => keys in loadedControls) {
 					if(keyBinds.exists(control)) keyBinds.set(control, keys);
 				}
