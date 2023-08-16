@@ -250,7 +250,7 @@ class ClientPrefs {
 		if(save != null)
 		{
 			if(save.data.keyboard != null) {
-				var loadedControls:Map<String, Array<FlxKey>> = save.data.keyboard;FRFF
+				var loadedControls:Map<String, Array<FlxKey>> = save.data.keyboard;
 				for (control => keys in loadedControls) {
 					if(keyBinds.exists(control)) keyBinds.set(control, keys);
 				}
