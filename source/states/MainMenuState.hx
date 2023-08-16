@@ -68,11 +68,10 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		//add(bg);
 
-		var bgScroll:FlxBackdrop = new FlxBackdrop(Paths.image('bgScroll'), 5, 5, true, true, -33, -32);
+		var bgScroll:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('bgScroll'));
 		bgScroll.scrollFactor.set();
 		bgScroll.screenCenter();
-		bgScroll.velocity.set(50, 50);
-		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
+		bgScroll.velocity.set(50, 0);
 		add(bgScroll);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
