@@ -1,0 +1,25 @@
+{
+	"songs": [
+		["Theo Song 1", "Theo", [165, 0, 77]],
+		["Alex Song 1", "Alex", [165, 0, 77]],
+		["Beginning", "Theeneo", [165, 0, 77]],
+		["Misconception", "Tahoo", [165, 0, 77]],
+		["Foresight", "Cyclops", [165, 0, 77]],
+		["Scarlet Sky", "Aquius", [165, 0, 77]]
+	],
+
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"weekBackground": "",
+
+	"storyName": "ANOTHER ADVENTURE ANOTHER STORY WITH ITS ALTERNATIVES.",
+	"weekBefore": "tutorial",
+	"weekName": "The Universe: One",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
