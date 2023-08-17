@@ -19,6 +19,8 @@ class MainMenuState extends MusicBeatState
 	public static var psychEngineVersion:String = '0.7.1h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
+	var background2:FlxSprite;
+
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
@@ -30,6 +32,8 @@ class MainMenuState extends MusicBeatState
 		'credits',
 		'options'
 	];
+
+	var char:FlxSprite;
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -60,19 +64,24 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('bgMENU'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
-		//add(bg);
+		add(bg);
+
+		background2 = new FlxSprite().loadGraphic(Paths.image('menu_spikes'));
+		background2.scrollFactor.set();
+		background2.screenCenter();
+		background2.color = FlxColor.BLACK;
+		add(background2);
 
 		var bgScroll:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('bgScroll'));
 		bgScroll.scrollFactor.set();
 		bgScroll.screenCenter();
 		bgScroll.velocity.set(50, 0);
-		add(bgScroll);
+		//add(bgScroll);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -229,7 +238,7 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+										MusicBeatState.switchState(new NEWstorymenustate());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
 									case 'awards':

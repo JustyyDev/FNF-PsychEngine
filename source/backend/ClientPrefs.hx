@@ -19,7 +19,8 @@ class SaveVariables {
 	public var splashSkin:String = 'Psych';
 	public var splashAlpha:Float = 0.6;
 	public var lowQuality:Bool = false;
-	public var shaders:Bool = true;
+	public var easyMode:Bool = false;
+	public var shaders:Bool = false;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
 	public var camZooms:Bool = true;
@@ -166,6 +167,8 @@ class ClientPrefs {
 			//trace('saved variable: $key');
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
 		}
+		FlxG.save.data.easyMode = easyMode;
+		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 		FlxG.save.flush();
@@ -203,6 +206,13 @@ class ClientPrefs {
 		} else {
 			FlxG.drawFramerate = data.framerate;
 			FlxG.updateFramerate = data.framerate;
+		}
+
+		if(FlxG.save.data.shaders != null){
+			shaders = FlxG.save.data.shaders;
+		}
+		if(FlxG.save.data.easyMode != null){
+			easyMode = FlxG.save.data.easyMode;
 		}
 
 		if(FlxG.save.data.gameplaySettings != null) {
