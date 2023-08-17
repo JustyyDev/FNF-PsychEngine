@@ -167,8 +167,6 @@ class ClientPrefs {
 			//trace('saved variable: $key');
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
 		}
-		FlxG.save.data.easyMode = easyMode;
-		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 		FlxG.save.flush();
@@ -207,14 +205,6 @@ class ClientPrefs {
 			FlxG.drawFramerate = data.framerate;
 			FlxG.updateFramerate = data.framerate;
 		}
-
-		if(FlxG.save.data.shaders != null){
-			shaders = FlxG.save.data.shaders;
-		}
-		if(FlxG.save.data.easyMode != null){
-			easyMode = FlxG.save.data.easyMode;
-		}
-
 		if(FlxG.save.data.gameplaySettings != null) {
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
 			for (name => value in savedMap)
