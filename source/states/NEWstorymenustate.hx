@@ -43,7 +43,7 @@ class NEWstorymenustate extends MusicBeatState
     ];
     var menuItems:FlxTypedGroup<FlxSprite>;
 
-    var scale:Float = 0.5;
+    var scale:Float = 0.25;
     /*if(optionShit.length > 6) {
         scale = 6 / optionShit.length;
     }*/
@@ -55,22 +55,21 @@ class NEWstorymenustate extends MusicBeatState
             BG.antialiasing = FlxG.save.data.antialiasing;
             add(BG);
 
-            spikes = new FlxSprite(0,0).loadGraphic(Paths.image("storymenu/menu_spikes"));
+            spikes = new FlxSprite(500,350).loadGraphic(Paths.image("storymenu/menu_spikes"));
             spikes.antialiasing = FlxG.save.data.antialiasing;
-			spikes.scale.y = scale;
-            add(spikes);
+            //add(spikes);
 
             arrows1 = new FlxSprite(450,-500).loadGraphic(Paths.image("storymenu/menu_arrows1"));
             arrows1.antialiasing = FlxG.save.data.antialiasing;
             arrows1.scale.x = scale;
 			arrows1.scale.y = scale;
-            add(arrows1);
+            //add(arrows1);
 
-            songnamer = new FlxSprite(0,-700).loadGraphic(Paths.image("storymenu/menu_songnamelonger"));
+            songnamer = new FlxSprite(-10,-850).loadGraphic(Paths.image("storymenu/menu_songnamelonger"));
             songnamer.antialiasing = FlxG.save.data.antialiasing;
-            songnamer.scale.x = scale;
-			songnamer.scale.y = scale;
-            add(songnamer);
+            songnamer.scale.x = 0.15;
+			songnamer.scale.y = 0.15;
+            //add(songnamer);
 
             var purpleBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.PURPLE);
             add(purpleBarThingie);
